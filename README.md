@@ -81,6 +81,64 @@ Frontend (React + Recoil):
     •	react-pdf
     •	react-router-dom
 
+## Flow of the program
+
+Client-Side: Uploading the PDF
+
+    •	User Interaction:
+    •	The user navigates to the frontend (built using React) and uploads a PDF document via a form.
+    •	Upon selecting the PDF, the user clicks “Submit.”
+    •	File Handling:
+    •	The file input is managed using react-dropzone, allowing the user to upload the PDF file.
+    •	The file is sent to the server using axios in a POST request to the specified API endpoint (e.g., /api/upload).
+
+2. Server-Side: Receiving and Parsing the PDF
+
+   • File Upload Handling:
+   • The server (built with Node.js and Express) receives the file via a POST request.
+   • Middleware like multer handles the file upload, temporarily storing the PDF for processing.
+   • PDF Parsing:
+   • The server uses pdf-parse to extract text content from the PDF. The extracted text is converted into a structured format for further analysis.
+
+3. Server-Side: Feature Extraction
+
+   • Text Feature Extraction:
+   • The extracted text is processed to identify key features such as keywords, dates, and other relevant details using NLP techniques like tokenization and stemming.
+   • Image Extraction:
+   • If images are present in the PDF, they are extracted using tools like pdf-image.
+   • The server extracts visual features from these images, converting them into numerical vectors for comparison.
+
+4. Server-Side: Similarity Calculation
+
+   • Text Similarity:
+   • The server vectorizes the extracted text using techniques like TF-IDF.
+   • Cosine Similarity and Jaccard Similarity are calculated to compare the text from the uploaded PDF against documents in the database.
+   • Image Similarity:
+   • The server calculates image similarity by comparing the vectorized features of images in the uploaded PDF with those in the database.
+   • Combined Similarity Score:
+   • The server combines the text and image similarity scores to determine an overall similarity score for each document in the database.
+
+5. Server-Side: Identifying the Most Similar PDF
+
+   • Similarity Ranking:
+   • The server ranks all documents in the database based on their combined similarity scores.
+   • The PDF with the highest similarity score is identified as the most similar document.
+   • Result Preparation:
+   • The server prepares a response containing the most similar PDF and the associated similarity score.
+
+6. Client-Side: Displaying the Result
+
+   • API Response Handling:
+   • The frontend receives the server’s response, which includes the most similar PDF and its similarity score.
+   • The response is processed, and the user is presented with the most similar document, along with the similarity score.
+
+Summary:
+
+    •	PDF Upload: The user uploads a PDF, which is sent to the server.
+    •	Feature Extraction: The server extracts text and image features from the PDF.
+    •	Similarity Calculation: The server calculates similarity scores using text and image similarity metrics.
+    •	Result: The server returns the most similar PDF and its similarity score, which is then displayed to the user.
+
 we can also implement the jaccard and cosine by ourselves without the library
 
 lets start, we can do it. it is possible, lets go. lets do this in a week.
