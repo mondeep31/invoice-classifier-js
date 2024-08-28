@@ -1,23 +1,18 @@
 import React from 'react';
-import { EmbedPDF } from "@simplepdf/react-embed-pdf";
+
 
 const DocumentViewer = () => {
     return (
-        <div>
-            {/* The PDF is displayed when rendering the component */}
-            <EmbedPDF
-                mode="inline"
-                style={{ width: 900, height: 800 }}
-                documentURL="Resume.pdf"
-            />
 
-            {/* The PDF picker is displayed when rendering the component */}
-            {/* <EmbedPDF
-                mode="inline"
-                style={{ width: 900, height: 800 }}
-            /> */}
+        <div style={{ height: '70vh', width: '100%' }}>
+            <iframe
+                src="/Resume.pdf"
+                style={{ width: '100%', height: '80vh', border: 'none' }}
+                title="PDF Viewer"
+            />
         </div>
     );
 };
 
 export default DocumentViewer;
+
