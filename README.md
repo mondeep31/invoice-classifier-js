@@ -142,3 +142,7 @@ Frontend (React + Recoil):
 we can also implement the jaccard and cosine by ourselves without the library
 
 lets start, we can do it. it is possible, lets go. lets do this in a week.
+
+changes made
+
+didnt use react-pdf, instead used iframe to display the pdf on the frontend, now need to start writing the backend code for it. will start tommorow

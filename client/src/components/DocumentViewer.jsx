@@ -3,7 +3,6 @@ import React from 'react';
 
 const DocumentViewer = () => {
     return (
-
         <div style={{ height: '70vh', width: '100%' }}>
             <iframe
                 src="/Resume.pdf"
