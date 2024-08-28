@@ -145,4 +145,6 @@ lets start, we can do it. it is possible, lets go. lets do this in a week.
 
 changes made
 
+#2 day 2
+
 didnt use react-pdf, instead used iframe to display the pdf on the frontend, now need to start writing the backend code for it. will start tommorow

@@ -9,7 +9,7 @@ export const Result = () => {
                 <div className="text-center mb-4">
                     <ScoreDisplayer />
                 </div>
-                <div className="h-[80vh]"> {/* Adjust the height as needed */}
+                <div className="h-[80vh]">
                     <DocumentViewer />
                 </div>
 
