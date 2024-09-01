@@ -1,5 +1,5 @@
-import { Header } from '../components/Header'
-import { Subheader } from '../components/Subheader'
+import { Header } from '../components/common/Header'
+import { Subheader } from '../components/common/Subheader'
 import InputForm from '../components/InputForm'
 
 import React from 'react'

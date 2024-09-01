@@ -1,8 +1,9 @@
 import React from "react"
-import { Header } from "../components/Header"
+import { Header } from "../components/common/Header"
 
-import { Subheader } from "../components/Subheader"
-import InputForm from "../components/InputForm"
+import { Subheader } from "../components/common/Subheader"
+
+import FileUploadForm from "../components/common/FileUploadForm"
 
 export const FormPage = () => {
     return (
@@ -11,7 +12,7 @@ export const FormPage = () => {
                 <div className="rounded-lg bg-white w-full text-center p-2 h-max px-4">
                     <Header label={"Upload a pdf to check"} />
                     <Subheader label={"Upload a pdf to find the most similar pdf"} />
-                    <InputForm />
+                    <FileUploadForm />
                 </div>
 
             </div>
