@@ -1,18 +1,28 @@
 import React from "react"
 import { Header } from "../components/common/Header"
-
 import { Subheader } from "../components/common/Subheader"
-
+import { checkFileSimilarity } from '../controller/fileController';
 import FileUploadForm from "../components/common/FileUploadForm"
 
-const FormPage = () => {
+
+const SimilarityCheckerView = () => {
+    const handleSubmit = async (file) => {
+        try {
+            await checkFileSimilarity(file);
+            alert('File uploaded to database successfully');
+        } catch (error) {
+            console.error('Error uploading file to database', error);
+            // Handle error (e.g., show a message to the user)
+        }
+    }
+
     return (
         <div className="bg-slate-300 h-screen flex justify-center">
             <div className="flex flex-col justify-center w-full, max-w-4xl">
                 <div className="rounded-lg bg-white w-full text-center p-2 h-max px-4">
                     <Header label={"Upload a pdf to check"} />
                     <Subheader label={"Upload a pdf to find the most similar pdf"} />
-                    <FileUploadForm buttonText={"Submit to check similar pdf"} />
+                    <FileUploadForm onSubmit={handleSubmit} buttonText={"Submit to check similar pdf"} />
                 </div>
 
             </div>
@@ -20,7 +30,7 @@ const FormPage = () => {
     )
 }
 
-export default FormPage
+export default SimilarityCheckerView
 
 /*
 import React from 'react';
