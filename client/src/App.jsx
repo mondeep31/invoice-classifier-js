@@ -1,17 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { FormPage } from "./views/SimilarityCheckerView"
+
 import { Result } from "./views/ResultView"
-import UploadDoc from "./views/UploadToDatabaseView";
+
+import UploadToDatabaseView from "./views/UploadToDatabaseView";
+import SimilarityCheckerView from "./views/SimilarityCheckerView"
 
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/form" element={<FormPage />} />
+        <Route path="/uploadtodatabase" element={<UploadToDatabaseView />} />
+        <Route path="/" element={<SimilarityCheckerView />} />
         <Route path="/result" element={<Result />} />
-        <Route path="/upload" element={<UploadDoc />} />
       </Routes>
     </BrowserRouter>
   )
