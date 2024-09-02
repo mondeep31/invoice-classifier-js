@@ -3,13 +3,16 @@ import { Header } from "../components/common/Header"
 import { Subheader } from "../components/common/Subheader"
 import { checkFileSimilarity } from '../controller/fileController';
 import FileUploadForm from "../components/common/FileUploadForm"
+import { useNavigate } from "react-router-dom";
 
 
 const SimilarityCheckerView = () => {
+    const navigate = useNavigate();
     const handleSubmit = async (file) => {
         try {
             await checkFileSimilarity(file);
             alert('File uploaded to database successfully');
+            navigate('/result');
         } catch (error) {
             console.error('Error uploading file to database', error);
             // Handle error (e.g., show a message to the user)
