@@ -1,7 +1,11 @@
 import DocumentViewer from "../components/DocumentViewer"
 import { ScoreDisplayer } from "../components/ScoreDisplayer"
+import { useLocation } from "react-router-dom"
 
 export const Result = () => {
+
+    const location = useLocation();
+    const { similarityScore } = location.state || { similarityScore: null }
     return <>
         <div className="bg-slate-300 h-screen flex justify-center p-20">
 

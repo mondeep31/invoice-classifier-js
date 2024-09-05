@@ -8,3 +8,12 @@ export const ScoreDisplayer = () => {
         </div>
     );
 };
+
+
+
+// {/* Display the similarity score */}
+// {similarityScore !== null ? (
+//     <ScoreDisplayer score={similarityScore} />
+// ) : (
+//     <div className="text-red-500 mt-4">Error: No similarity score available.</div>
+// )}
