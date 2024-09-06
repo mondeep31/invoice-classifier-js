@@ -578,3 +578,92 @@ module.exports = router;
 - Added placeholders for `sharp` and `opencv4nodejs` for image similarity, which can be enhanced depending on the requirements.
 
 This structure now reflects the flow you need for the **Invoice Classifier** project. Let me know if you'd like further refinements!
+
+Here's a detailed breakdown of the flow of the **Invoice Classifier** project. We'll walk through each step of how the system operates from the moment a user uploads a PDF on the frontend, to the point where the most similar PDF is identified and returned from the database on the backend.
+
+### Flow of the Program:
+
+#### 1. **Frontend (React)**:
+
+- **Upload Form**:
+  - The user uploads a PDF file via the **FileUploadForm** in the React frontend.
+  - Upon submission, this PDF file is sent to the backend server using an API call (through `axios`).
+
+#### 2. **API Call to Backend (Node.js + Express)**:
+
+- When the user uploads a file, a POST request is sent to the server (`/api/v1/upload`).
+- **Multer** is used to handle the file upload on the server side, and it stores the file temporarily for processing.
+
+#### 3. **Text Extraction**:
+
+- **Tesseract.js** is used if the PDF contains scanned images or non-text data to perform **Optical Character Recognition (OCR)** and extract text from the images within the PDF.
+- **pdf-parse** extracts raw text from any textual parts of the PDF file.
+- This raw text forms the base for further processing and similarity comparison.
+
+#### 4. **Preprocessing (Natural Language Processing)**:
+
+- **Tokenization**: Break the extracted text into individual words or tokens using the `natural` module.
+- **Stemming/Lemmatization**: Reduce words to their base forms (e.g., "running" becomes "run") to simplify comparison between documents.
+- **Stop Word Removal**: Common words (e.g., "the", "and") that do not contribute to meaning are removed to focus on significant words.
+
+#### 5. **Feature Extraction**:
+
+- From the preprocessed text, key features such as **invoice numbers, dates, keywords**, and **amounts** are extracted. This is typically done using regular expressions or certain NLP techniques provided by the `natural` module.
+
+#### 6. **Text Similarity Calculation**:
+
+- After feature extraction, the backend calculates **text similarity**:
+  - **TF-IDF Vectorization**: Text features are converted into numeric vectors using **TF-IDF** (Term Frequency - Inverse Document Frequency). This gives us a weighted representation of words based on their importance in the document.
+  - **Cosine Similarity**: Calculates the cosine of the angle between two vectors (representing the documents), giving a measure of how similar the documents are.
+  - **Jaccard Similarity**: Measures the overlap between the sets of words in two documents, giving another measure of similarity.
+
+#### 7. **Image Similarity Calculation**:
+
+- If necessary, the system also compares the **layout** and **images** in the PDF:
+  - **Sharp** is used for image processing.
+  - **opencv4nodejs** helps compare visual elements, like the structure or layout of the PDF. This is particularly useful for scanned invoices where the layout might be crucial.
+  - Images from the uploaded PDF are compared to images stored in other documents in the database.
+
+#### 8. **Combined Similarity Score**:
+
+- The system combines the **text similarity score** (from Cosine and Jaccard similarity) and the **image similarity score** to form a **final similarity score** for each document in the database.
+
+#### 9. **Comparison and Ranking**:
+
+- The backend now compares the uploaded PDF with all PDFs in the database.
+- Documents are ranked based on their combined similarity score (higher score = more similar).
+- The **most similar PDF** is identified.
+
+#### 10. **Return Response to Frontend**:
+
+- The server sends a response to the frontend with:
+  - The **most similar PDF** from the database.
+  - The **similarity score** indicating how closely it matches the uploaded document.
+
+#### 11. **Display on Frontend**:
+
+- On the frontend, once the server sends back the result, the user is navigated to a **result page** where they can see:
+  - The most similar PDF displayed.
+  - The similarity score that indicates how similar the document is to the uploaded one.
+
+---
+
+### Recap of Key Modules and Their Roles:
+
+1. **Tesseract.js**: OCR for image-based PDFs.
+2. **pdf-parse**: Text extraction from PDFs.
+3. **Natural**: Tokenization, stemming, stop word removal, and similarity calculation.
+4. **Lodash**: Utility functions for data manipulation.
+5. **Sharp & OpenCV**: For image comparison and layout analysis.
+6. **Cosine Similarity**: Measures text similarity based on vectorized text.
+7. **Jaccard Similarity**: Measures overlap between sets of words.
+8. **Multer**: File upload handling.
+
+---
+
+### Why This Structure Works:
+
+- **Modularized**: Each step of the process (text extraction, similarity calculation, image processing) is handled by a different set of modules, making the system easy to manage and extend.
+- **Optimized for Accuracy**: By combining text and image similarity, the system offers a more comprehensive similarity check, suitable for invoice documents where layout and content are both crucial.
+
+Does this breakdown help clarify things for you? Feel free to ask if any part needs more detail!
