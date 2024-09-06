@@ -12,8 +12,8 @@ export const checkFileSimilarity = async (file) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Error checking file similarity', error);
-        throw error;
+        throw new error('Error checking file similarity');
+
     }
 };
 
@@ -29,7 +29,7 @@ export const uploadFileToDatabase = async (file) => {
         });
         return response.data;
     } catch (error) {
-        console.error("Error uploading file to the database: ", error);
-        throw error;
+        throw error("Error uploading file to the database: ",);
+
     }
 };
