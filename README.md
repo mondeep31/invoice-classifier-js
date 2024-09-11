@@ -152,3 +152,5 @@ didnt use react-pdf, instead used iframe to display the pdf on the frontend, now
 checkpoint
 
 updated readme
+
+If the text extraction and feature extraction are working fine, let me know so we can move on to vectorization and similarity calculations!
