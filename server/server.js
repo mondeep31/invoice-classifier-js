@@ -2,6 +2,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv');
+const uploadRoutes = require('./routes/uploadRoutes')
 
 // Load environment variables from .env file
 dotenv.config();
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.json());
 
 // Your routes will go here
+app.use('/api/v1', uploadRoutes);
 
 const PORT = process.env.PORT || 5000;
 
