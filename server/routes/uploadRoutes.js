@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
-router.post('/upload', upload.single('file'), async (req, res) => {
+router.post('/upload', upload.single('pdf'), async (req, res) => {
     try {
         const newPDF = new PDF({
             name: req.file.originalname,
