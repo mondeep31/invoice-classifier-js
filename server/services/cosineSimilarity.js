@@ -7,6 +7,7 @@ const alignVectors = (vectorA, vectorB) => {
         termMap[item.term] = { a: item.tfidf, b: 0 };
     });
 
+
     // Collect all terms from vectorB and update existing or add new terms with their TF-IDF values
     vectorB.forEach(item => {
         if (termMap[item.term]) {
@@ -19,7 +20,8 @@ const alignVectors = (vectorA, vectorB) => {
     // Convert the termMap into two aligned arrays
     const alignedA = Object.values(termMap).map(item => item.a);
     const alignedB = Object.values(termMap).map(item => item.b);
-
+    // console.log("alignedA", alignedA)
+    // console.log("alignedB", alignedB)
     // Return the aligned vectors
     return [alignedA, alignedB];
 };
@@ -36,8 +38,10 @@ const cosineSimilarity = (vectorA, vectorB) => {
     const magnitudeA = Math.sqrt(alignedA.reduce((sum, aVal) => sum + (aVal * aVal), 0));
     const magnitudeB = Math.sqrt(alignedB.reduce((sum, bVal) => sum + (bVal * bVal), 0));
 
+    const result = magnitudeA && magnitudeB ? dotProduct / (magnitudeA * magnitudeB) : 0;
+    console.log("Result is", result)
     // Return cosine similarity or 0 if either magnitude is 0 (to avoid division by zero)
-    return magnitudeA && magnitudeB ? dotProduct / (magnitudeA * magnitudeB) : 0;
+    return result;
 };
 
 // Export the cosineSimilarity function
