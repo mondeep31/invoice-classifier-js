@@ -4,6 +4,8 @@ const FileUploadForm = ({ onSubmit, buttonText }) => {
     const [fileName, setFileName] = useState('');
     const [isFileUploaded, setIsFileUploaded] = useState(false);
     const fileInputRef = useRef(null);
+    const [similarityResults, setSimilarityResults] = useState(null);
+
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -43,7 +45,8 @@ const FileUploadForm = ({ onSubmit, buttonText }) => {
         const file = fileInputRef.current.files[0];
         if (file) {
             try {
-                await onSubmit(file);
+                const result = await onSubmit(file);
+                setSimilarityResults(result);
             } catch (error) {
                 console.error('Error uploading file to database', error);
             }

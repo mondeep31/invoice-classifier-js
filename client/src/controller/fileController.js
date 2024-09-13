@@ -5,14 +5,15 @@ export const checkFileSimilarity = async (file) => {
     formData.append('file', file);
 
     try {
-        const response = await axios.post('/api/v1/check-similarity', formData, {
+        const response = await axios.post('http://localhost:5000/api/v1/checksimilarity', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             }
         });
         return response.data;
     } catch (error) {
-        throw new error('Error checking file similarity');
+        console.error('Error checking file similarity', error)
+        throw error;
 
     }
 };
@@ -22,7 +23,7 @@ export const uploadFileToDatabase = async (file) => {
     formData.append('file', file);
 
     try {
-        const response = await axios.post('/api/v1/upload', formData, {
+        const response = await axios.post('http://localhost:5000/api/v1/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

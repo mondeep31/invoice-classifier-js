@@ -13,16 +13,20 @@ const SimilarityCheckerView = () => {
     const handleSubmit = async (file) => {
         try {
             const result = await checkFileSimilarity(file);
-            const similarityScore = result.similarityScore;
+            const { mostSimilarPDF, allResults } = result;
 
-            // Clear previous messages
             setErrorMessage('');
             setSuccessMessage('File uploaded successfully. Redirecting to results...');
 
-            // Delay navigation to allow users to see the success message
             setTimeout(() => {
-                navigate('/result', { state: { similarityScore } });
-            }, 1500); // 1.5 seconds delay
+                navigate('/result', {
+                    state: {
+                        mostSimilarPDF,
+                        allResults,
+                        uploadedFileName: file.name
+                    }
+                });
+            }, 1500);
         } catch (error) {
             console.error('Error checking file similarity', error);
             setErrorMessage('Error checking file similarity. Please try again.');
