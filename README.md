@@ -156,3 +156,5 @@ updated readme
 If the text extraction and feature extraction are working fine, let me know so we can move on to vectorization and similarity calculations!
 
 what is the next step after testing it. is the backend done, is it everything needed. do we need anything more to deal with it? if i upload a pdf in the client side, and hit both the endpoint /upload and /checksimilarity and will it return the most similar pdf based on the similarity score and return the most similar pdf in the frontend from the database itself. do not provide anything for the frontend for now, let me complete the backend first.
+
+update: no image recognition is used so no opencv or tf
