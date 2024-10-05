@@ -20,7 +20,7 @@ app.use(express.json());
 // Your routes will go here
 app.use('/api/v1', uploadRoutes);
 app.use('/api/v1', similarityRoutes);
-app.use('api/v1', servePdf);
+app.use('/api/v1', servePdf);
 
 const PORT = process.env.PORT || 5000;
 
